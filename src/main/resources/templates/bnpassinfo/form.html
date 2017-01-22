@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>mytest</title>
+</head>
+<body th:inline="text">
+<!-- BEGIN PAGE CONTAINER-->
+<div>
+
+    <!-- BEGIN ADVANCED TABLE widget-->
+    <div class="row-fluid">
+        <div class="span12">
+
+            <!-- BEGIN EXAMPLE TABLE widget-->
+            <div class="widget red">
+
+                <div class="widget-title">
+                    <h4>
+                        <i class="icon-reorder"></i>编辑
+                    </h4>
+                </div>
+
+                <div class="widget-body form">
+                    <form id="editForm"   th:action="@{/bnpassinfo/}+${operation}" method="POST" class="form-horizontal">
+                        <input type="hidden" name="id" th:value="${bnPassInfo.id}"/>
+                        <div class="control-group">
+                            <label class="control-label">名称:</label>
+                            <div class="controls">
+                                <input type="text" class="span8"  name="passName" th:value="${bnPassInfo.passName}"/>
+                                <span class="help-inline"></span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">密码:</label>
+                            <div class="controls">
+                                <input type="text" class="span8"  name="passInfo" th:value="${bnPassInfo.passInfo}"/>
+                                <span class="help-inline"></span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">备注:</label>
+                            <div class="controls">
+                                <input type="text" class="span8"  name="passRemark" th:value="${bnPassInfo.passRemark}"/>
+                                <span class="help-inline"></span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls">
+                                <button type="submit" class="btn btn-success" >
+                                    <i class="icon-ok icon-white"></i>提交
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+            <!-- END EXAMPLE TABLE widget-->
+        </div>
+    </div>
+    <!-- END ADVANCED TABLE widget-->
+</div>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+
+    /*]]>*/
+</script>
+</body>
+</html>
+

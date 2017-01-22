@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>mytest</title>
+</head>
+<body th:inline="text">
+<!-- BEGIN PAGE CONTAINER-->
+<div>
+
+    <!-- BEGIN ADVANCED TABLE widget-->
+    <div class="row-fluid">
+        <div class="span12">
+
+            <!-- BEGIN EXAMPLE TABLE widget-->
+            <div class="widget red">
+
+                <div class="widget-title">
+                    <h4>
+                        <i class="icon-reorder"></i>用户编辑
+                    </h4>
+                </div>
+
+                <div class="widget-body form">
+                    <form id="editForm"   th:action="@{/user/}+${operation}" method="POST" class="form-horizontal">
+                        <input type="hidden" name="id" th:value="${user.id}"/>
+                        <div class="control-group">
+                            <label class="control-label">登录名:</label>
+                            <div class="controls">
+                                <input type="text" class="span8"  name="userName" th:value="${user.userName}"/>
+                                <span class="help-inline"></span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">密码:</label>
+                            <div class="controls">
+                                <input type="text" class="span8"  name="userPassword" />
+                                <span class="help-inline"></span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">用户名:</label>
+                            <div class="controls">
+                                <input type="text" class="span8"  name="showName" th:value="${user.showName}"/>
+                                <span class="help-inline"></span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">角色:</label>
+                            <div class="controls">
+                                <select class="span8" tabindex="1" name="role">
+                                    <option value="user">普通用户</option>
+                                    <option value="admin">管理员</option>
+                                    <option value="administrator">超级管理员</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls">
+                                <button type="submit" class="btn btn-success" >
+                                    <i class="icon-ok icon-white"></i>提交
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+            <!-- END EXAMPLE TABLE widget-->
+        </div>
+    </div>
+    <!-- END ADVANCED TABLE widget-->
+</div>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+
+    /*]]>*/
+</script>
+</body>
+</html>
+
