@@ -88,7 +88,14 @@
     </div>
     </form>
 </div>
-
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var loginError = [[${longinError}]];
+    if (loginError != null && loginError != "") {
+        alert("用户名或密码错误");
+    }
+    /*]]>*/
+</script>
 </body>
 <!-- END BODY -->
 </html>
