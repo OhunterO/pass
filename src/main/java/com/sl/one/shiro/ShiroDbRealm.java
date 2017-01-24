@@ -8,15 +8,12 @@ package com.sl.one.shiro;
 
 import com.sl.one.entity.PUser;
 import com.sl.one.service.user.UserService;
-import com.t4.fw.util.Encodes;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
-
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
@@ -24,16 +21,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.annotation.PostConstruct;
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * 用户认证
  */
 public class ShiroDbRealm extends AuthorizingRealm {
 
-    public static final String HASH_ALGORITHM = "SHA-1";
+    public static final String HASH_ALGORITHM = "md5";
     public static final int HASH_INTERATIONS = 1024;
     public static final int SALT_SIZE = 8;
 
@@ -53,8 +46,8 @@ public class ShiroDbRealm extends AuthorizingRealm {
 
         logger.debug("登录查询,UserNo:" + token.getUsername());
         if (user != null) {
-            byte[] saltByte = Encodes.decodeHex(user.getSalt());
-            return new SimpleAuthenticationInfo(user, user.getUserPassword(), ByteSource.Util.bytes(saltByte),
+            byte[] salt = Digests.decodeHex(user.getSalt());
+            return new SimpleAuthenticationInfo(user, user.getUserPassword(), ByteSource.Util.bytes(salt),
                     getName());
         } else {
             return null;

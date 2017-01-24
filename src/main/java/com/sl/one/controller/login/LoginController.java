@@ -28,6 +28,7 @@ public class LoginController {
                        HttpServletRequest request) {
         String error = (String) request.getAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME);
         model.addAttribute(FormAuthenticationFilter.DEFAULT_USERNAME_PARAM, userName);
+        model.addAttribute("longinError",error);
         return "login/login";
     }
 

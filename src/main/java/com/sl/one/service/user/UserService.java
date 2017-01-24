@@ -7,9 +7,9 @@ import com.sl.one.mapper.entityMapper.PUserMapper;
 import com.sl.one.mapper.serviceMapper.UserServiceMapper;
 import com.sl.one.service.common.CommonService;
 import com.sl.one.service.dataTable.TableData;
+import com.sl.one.shiro.Digests;
 import com.sl.one.shiro.ShiroDbRealm;
-import com.t4.fw.util.Digests;
-import com.t4.fw.util.Encodes;
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -101,9 +101,15 @@ public class UserService {
     private void initPassword(PUser user) {
         if (!StringUtils.isEmpty(user.getUserPassword())) {
             byte[] salt = Digests.generateSalt(ShiroDbRealm.SALT_SIZE);
-            user.setSalt(Encodes.encodeHex(salt));
-            byte[] hashPassword = Digests.sha1(user.getUserPassword().getBytes(), salt, ShiroDbRealm.HASH_INTERATIONS);
-            user.setUserPassword(Encodes.encodeHex(hashPassword));
+            user.setSalt(Digests.encodeHex(salt));
+            SimpleHash simpleHash = new SimpleHash(ShiroDbRealm.HASH_ALGORITHM, user.getUserPassword(), salt, ShiroDbRealm.HASH_INTERATIONS);
+            user.setUserPassword(simpleHash.toString());
         }
+    }
+    public  static  void main(String[] args){
+        byte[] salt = Digests.generateSalt(ShiroDbRealm.SALT_SIZE);
+        System.out.println(Digests.encodeHex(salt));
+        SimpleHash simpleHash = new SimpleHash(ShiroDbRealm.HASH_ALGORITHM,"123", salt, ShiroDbRealm.HASH_INTERATIONS);
+        System.out.println(simpleHash.toString());
     }
 }
