@@ -9,7 +9,8 @@ import org.springframework.boot.web.support.SpringBootServletInitializer;
 @SpringBootApplication
 @ServletComponentScan
 public class PassApplication extends SpringBootServletInitializer{
-    
+
+    @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
         builder.sources(this.getClass());
         return super.configure(builder);
